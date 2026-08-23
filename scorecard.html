@@ -359,6 +359,65 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
 :root:not([data-theme="light"]) .pagenav:hover { color: #0D1311; }
 .pagenav:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
+/* price breakdown inside an expanded row */
+
+.pricebox {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  max-width: 460px;
+}
+
+.pb-head {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.pb-list { display: flex; flex-direction: column; gap: 5px; }
+
+.pb-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 0.83rem;
+  color: var(--ink-soft);
+}
+.pb-row::before {
+  content: "";
+  order: 1;
+  flex: 1;
+  border-bottom: 1px dotted var(--rule);
+  transform: translateY(-3px);
+}
+.pb-label { order: 0; }
+.pb-amt {
+  order: 2;
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.pb-machine .pb-label { color: var(--ink); font-weight: 600; }
+.pb-machine .pb-amt { color: var(--ink); font-weight: 600; }
+
+.pb-total {
+  margin-top: 3px;
+  padding-top: 7px;
+  border-top: 1px solid var(--rule);
+  color: var(--ink);
+}
+.pb-total .pb-label { font-family: var(--display); font-weight: 600; }
+.pb-total .pb-amt { font-weight: 600; color: var(--accent); font-size: 0.95rem; }
+.pb-total::before { border-bottom-color: transparent; }
+
+.pb-note { font-size: 0.78rem; color: var(--ink-faint); line-height: 1.45; margin: 0; max-width: 46ch; }
+
 /* ---------- prose ---------- */
 
 section { display: flex; flex-direction: column; gap: 16px; }
@@ -510,6 +569,7 @@ img { max-width: 100%; height: auto; }
     </div>
     <h1>Office PC Scorecard</h1>
     <p class="standfirst">Move the sliders to say what matters for your desk. The leaderboard re-ranks as you go. Prices are the <strong>complete desk</strong> — machine, monitor, UPS and peripherals — not just the box.</p>
+    <p class="standfirst"><strong>Office software is not included in any figure here.</strong> Budget roughly <strong>৳4,440 per person per year</strong> for Microsoft 365 Business Basic, which covers business email on your own domain and 1&nbsp;TB of OneDrive. It is sold by local resellers — Star Tech, Ryans and Microsoft partners such as LKEY — and pairs with free ONLYOFFICE on the desktop, since Basic licenses the web and mobile apps only.</p>
     <a class="pagenav" href="./index.html">&larr; Full guide &amp; research</a>
     <div class="rule"></div>
   </header>
@@ -559,58 +619,80 @@ img { max-width: 100%; height: auto; }
 
   // price = desk total in BDT; extras already included per machine type
   var MACHINES = [
-    { name: "Qbits Lania DX2 i5", url: "https://qbits.com/product-details/18/Qbits-Lania-DX2-Core%E2%84%A2-i5-12400-16-GB-RAM-500-GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Core i5-12400 · 16 GB · 500 GB NVMe · mini PC", total: 64000,
+    { name: "Qbits Lania DX2 i5", base: 47000, kind: "desktop", url: "https://qbits.com/product-details/18/Qbits-Lania-DX2-Core%E2%84%A2-i5-12400-16-GB-RAM-500-GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Core i5-12400 · 16 GB · 500 GB NVMe · mini PC", total: 64000,
       tags: [["16 GB", "good"], ["stock unconfirmed", "warn"]],
       s: { cpu: 9, mem: 9, storage: 8, warranty: 6, avail: 3, upgrade: 7, size: 8 } },
 
-    { name: "Qbits Lania X1 i7", url: "https://qbits.com/product-details/21/Qbits-Lania-X1-Intel%C2%AE-Core%E2%84%A2-i7-1165G7-16GB-DDR4-RAM-500GB-M.2-Western-Digital-NVMe-SSD", shop: "Qbits",   spec: "Core i7-1165G7 · 16 GB · 500 GB NVMe · Thunderbolt 4", total: 63999,
+    { name: "Qbits Lania X1 i7", base: 46999, kind: "desktop", url: "https://qbits.com/product-details/21/Qbits-Lania-X1-Intel%C2%AE-Core%E2%84%A2-i7-1165G7-16GB-DDR4-RAM-500GB-M.2-Western-Digital-NVMe-SSD", shop: "Qbits",   spec: "Core i7-1165G7 · 16 GB · 500 GB NVMe · Thunderbolt 4", total: 63999,
       tags: [["16 GB", "good"], ["warranty unclear", "warn"]],
       s: { cpu: 7, mem: 9, storage: 8, warranty: 5, avail: 4, upgrade: 8, size: 9 } },
 
-    { name: "Qbits Lania DX2 i3", url: "https://qbits.com/product-details/15/Qbits-Lania-DX2-Core%E2%84%A2-i3-12100-8-GB-RAM-500-GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Core i3-12100 · 8 GB · 500 GB NVMe · mini PC", total: 51999,
+    { name: "Qbits Lania DX2 i3", base: 34999, kind: "desktop", url: "https://qbits.com/product-details/15/Qbits-Lania-DX2-Core%E2%84%A2-i3-12100-8-GB-RAM-500-GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Core i3-12100 · 8 GB · 500 GB NVMe · mini PC", total: 51999,
       tags: [["price disputed", "warn"]],
       s: { cpu: 7, mem: 4, storage: 8, warranty: 6, avail: 3, upgrade: 8, size: 8 } },
 
-    { name: "Qbits Lania Mini F", url: "https://qbits.com/product-details/55/Qbits-Lania-Mini-F-Intel-N95-Processor-16GB-DDR4-RAM-500GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Intel N95 · 16 GB · 500 GB NVMe · 0.35 kg", total: 44999,
+    { name: "Qbits Lania Mini F", base: 27999, kind: "desktop", url: "https://qbits.com/product-details/55/Qbits-Lania-Mini-F-Intel-N95-Processor-16GB-DDR4-RAM-500GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Intel N95 · 16 GB · 500 GB NVMe · 0.35 kg", total: 44999,
       tags: [["16 GB", "good"]],
       s: { cpu: 4, mem: 9, storage: 8, warranty: 6, avail: 6, upgrade: 4, size: 10 } },
 
-    { name: "Qbits Mini F 256 GB", url: "https://qbits.com/product-details/60/Qbits-Lania-Mini-F-Intel-N95-Processor-16GB-DDR4-RAM-256GB-M.2-NVMe-SSD", shop: "Qbits", spec: "Intel N95 · 16 GB · 256 GB NVMe · 0.35 kg", total: 41999,
+    { name: "Qbits Mini F 256 GB", base: 24999, kind: "desktop", url: "https://qbits.com/product-details/60/Qbits-Lania-Mini-F-Intel-N95-Processor-16GB-DDR4-RAM-256GB-M.2-NVMe-SSD", shop: "Qbits", spec: "Intel N95 · 16 GB · 256 GB NVMe · 0.35 kg", total: 41999,
       tags: [["16 GB", "good"], ["cheapest desk", "good"]],
       s: { cpu: 4, mem: 9, storage: 6, warranty: 6, avail: 6, upgrade: 4, size: 10 } },
 
-    { name: "Walton i5-10400", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand",     spec: "Core i5-10400 · 8 GB · 256 GB SSD + 1 TB HDD · tower", total: 65550,
+    { name: "Walton i5-10400", base: 48550, kind: "desktop", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand",     spec: "Core i5-10400 · 8 GB · 256 GB SSD + 1 TB HDD · tower", total: 65550,
       tags: [["nationwide service", "good"]],
       s: { cpu: 7, mem: 4, storage: 6, warranty: 9, avail: 9, upgrade: 9, size: 3 } },
 
-    { name: "Walton i3-10100", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand",     spec: "Core i3-10100 · 8 GB · 256 GB SSD + 1 TB HDD · tower", total: 56950,
+    { name: "Walton i3-10100", base: 39950, kind: "desktop", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand",     spec: "Core i3-10100 · 8 GB · 256 GB SSD + 1 TB HDD · tower", total: 56950,
       tags: [["nationwide service", "good"]],
       s: { cpu: 5, mem: 4, storage: 6, warranty: 9, avail: 9, upgrade: 9, size: 3 } },
 
-    { name: "Star Tech i5-12400", url: "https://www.startech.com.bd/intel-12th-gen-core-i5-12400-desktop-pc", shop: "Star Tech",  spec: "Core i5-12400 · RAM not stated · tower", total: 68500,
+    { name: "Star Tech i5-12400", base: 51500, kind: "desktop", url: "https://www.startech.com.bd/intel-12th-gen-core-i5-12400-desktop-pc", shop: "Star Tech",  spec: "Core i5-12400 · RAM not stated · tower", total: 68500,
       tags: [["walk in and buy", "good"], ["RAM unstated", "warn"]],
       s: { cpu: 9, mem: 4, storage: 6, warranty: 7, avail: 10, upgrade: 9, size: 3 } },
 
-    { name: "Star Tech i3-12100", url: "https://www.startech.com.bd/intel-core-i3-12100-12th-gen-budget-desktop-pc", shop: "Star Tech",  spec: "Core i3-12100 · RAM not stated · tower", total: 60600,
+    { name: "Star Tech i3-12100", base: 43600, kind: "desktop", url: "https://www.startech.com.bd/intel-core-i3-12100-12th-gen-budget-desktop-pc", shop: "Star Tech",  spec: "Core i3-12100 · RAM not stated · tower", total: 60600,
       tags: [["walk in and buy", "good"], ["RAM unstated", "warn"]],
       s: { cpu: 7, mem: 4, storage: 6, warranty: 7, avail: 10, upgrade: 9, size: 3 } },
 
-    { name: "Eastern IT i5-12400", url: "https://www.eit.com.bd/desktop", shop: "Eastern IT", spec: "Core i5-12400 · 8 GB · 256 GB SSD · tower", total: 64700,
+    { name: "Eastern IT i5-12400", base: 47700, kind: "desktop", url: "https://www.eit.com.bd/desktop", shop: "Eastern IT", spec: "Core i5-12400 · 8 GB · 256 GB SSD · tower", total: 64700,
       tags: [],
       s: { cpu: 9, mem: 4, storage: 6, warranty: 6, avail: 8, upgrade: 9, size: 3 } },
 
-    { name: "Dell Pro Tower", url: "https://www.eit.com.bd/desktop", shop: "Eastern IT",      spec: "Core i3-14100 · 8 GB DDR5 · 512 GB SSD · tower", total: 85000,
+    { name: "Dell Pro Tower", base: 68000, kind: "desktop", url: "https://www.eit.com.bd/desktop", shop: "Eastern IT",      spec: "Core i3-14100 · 8 GB DDR5 · 512 GB SSD · tower", total: 85000,
       tags: [["brand warranty", "good"]],
       s: { cpu: 7, mem: 4, storage: 8, warranty: 9, avail: 7, upgrade: 8, size: 4 } },
 
-    { name: "Walton all-in-one", url: "https://www.techlandbd.com/computers/desktop-computer", shop: "TechLand",   spec: "Core i3 12th gen · 16 GB · 512 GB SSD · screen built in", total: 68250,
+    { name: "Walton all-in-one", base: 61550, kind: "aio", url: "https://www.techlandbd.com/computers/desktop-computer", shop: "TechLand",   spec: "Core i3 12th gen · 16 GB · 512 GB SSD · screen built in", total: 68250,
       tags: [["16 GB", "good"], ["monitor included", "good"]],
       s: { cpu: 7, mem: 9, storage: 8, warranty: 9, avail: 8, upgrade: 4, size: 7 } },
 
-    { name: "HP EliteBook 840 G9", url: "https://www.bdstall.com/details/hp-elitebook-840-g9-core-i5-12th-gen-512gb-ssd-98287/", shop: "BDStall", spec: "Core i5 12th gen · 16 GB · 512 GB · refurbished import", total: 59300,
+    { name: "HP EliteBook 840 G9", base: 49000, kind: "laptop", url: "https://www.bdstall.com/details/hp-elitebook-840-g9-core-i5-12th-gen-512gb-ssd-98287/", shop: "BDStall", spec: "Core i5 12th gen · 16 GB · 512 GB · refurbished import", total: 59300,
       tags: [["16 GB", "good"], ["no maker warranty", "warn"]],
       s: { cpu: 8, mem: 9, storage: 8, warranty: 2, avail: 5, upgrade: 5, size: 9 } }
   ];
+
+  // what a finished desk needs on top of the machine itself
+  var EXTRAS = {
+    desktop: [
+      ["22-inch FHD IPS monitor", 8800],
+      ["1200 VA offline UPS", 6700],
+      ["Keyboard, mouse, power strip", 1500]
+    ],
+    aio: [
+      ["1200 VA offline UPS", 6700]
+    ],
+    laptop: [
+      ["22-inch FHD IPS monitor", 8800],
+      ["Keyboard and mouse", 1500]
+    ]
+  };
+
+  var KIND_NOTE = {
+    desktop: "Tower and mini PC prices are for the box alone.",
+    aio: "The screen is built in, so no separate monitor is needed.",
+    laptop: "No UPS — the battery already covers a power cut."
+  };
 
   var PRESETS = {
     "Office desk":     { price: 4, cpu: 4, mem: 5, storage: 3, warranty: 3, avail: 4, upgrade: 2, size: 2 },
@@ -848,6 +930,46 @@ img { max-width: 100%; height: auto; }
           bd.appendChild(item);
         });
         det.appendChild(bd);
+
+        // price breakdown: how the desk total is actually made up
+        var pb = document.createElement("div");
+        pb.className = "pricebox";
+
+        var ph = document.createElement("div");
+        ph.className = "pb-head";
+        ph.textContent = "What the " + taka(m.total) + " desk is made of";
+        pb.appendChild(ph);
+
+        var list = document.createElement("div");
+        list.className = "pb-list";
+
+        function line(label, amount, cls) {
+          var r = document.createElement("div");
+          r.className = "pb-row" + (cls ? " " + cls : "");
+          var n = document.createElement("span");
+          n.className = "pb-label";
+          n.textContent = label;
+          var v = document.createElement("span");
+          v.className = "pb-amt";
+          v.textContent = taka(amount);
+          r.appendChild(n);
+          r.appendChild(v);
+          return r;
+        }
+
+        list.appendChild(line(m.name + " — from " + m.shop, m.base, "pb-machine"));
+        (EXTRAS[m.kind] || []).forEach(function (e) {
+          list.appendChild(line(e[0], e[1]));
+        });
+        list.appendChild(line("Total desk cost", m.total, "pb-total"));
+        pb.appendChild(list);
+
+        var note = document.createElement("p");
+        note.className = "pb-note";
+        note.textContent = KIND_NOTE[m.kind] + " Software is not included \u2014 budget about \u09f34,440 a year for Microsoft 365 Business Basic.";
+        pb.appendChild(note);
+
+        det.appendChild(pb);
         row.appendChild(det);
       }
 
