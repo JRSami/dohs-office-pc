@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Weight what matters for an office desk in Dhaka and see 13 machines re-rank. Prices are the complete desk, August 2026.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Office PC Scorecard">
+<meta property="og:description" content="Interactive scorecard for choosing an office PC in Dhaka.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#128202;</text></svg>">
+<title>Office PC Scorecard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+:root {
+  --paper:      #F5F7F4;
+  --surface:    #FFFFFF;
+  --surface-2:  #EDF1EC;
+  --ink:        #141C18;
+  --ink-soft:   #55635C;
+  --ink-faint:  #7D8A83;
+  --rule:       #D3DBD5;
+  --rule-soft:  #E3E9E4;
+  --accent:     #0E6349;
+  --accent-mid: #4F9A7E;
+  --accent-dim: #C3DED2;
+  --accent-bg:  #E9F2EE;
+  --flag:       #8A5A12;
+
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:     #0D1311;
+    --surface:   #151D1A;
+    --surface-2: #1D2723;
+    --ink:       #E4EBE7;
+    --ink-soft:  #A0AFA8;
+    --ink-faint: #7C8B84;
+    --rule:      #2B3733;
+    --rule-soft: #212B27;
+    --accent:    #56C29A;
+    --accent-mid:#2F7C61;
+    --accent-dim:#23473A;
+    --accent-bg: #16302650;
+    --flag:      #D9AC5E;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper:     #0D1311;
+  --surface:   #151D1A;
+  --surface-2: #1D2723;
+  --ink:       #E4EBE7;
+  --ink-soft:  #A0AFA8;
+  --ink-faint: #7C8B84;
+  --rule:      #2B3733;
+  --rule-soft: #212B27;
+  --accent:    #56C29A;
+  --accent-mid:#2F7C61;
+  --accent-dim:#23473A;
+  --accent-bg: #16302650;
+  --flag:      #D9AC5E;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0 20px 80px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 34px; }
+
+/* ---------- header ---------- */
+
+header { padding-top: 48px; display: flex; flex-direction: column; gap: 14px; }
+
+.dateline {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center;
+}
+.dateline .dot { color: var(--ink-faint); }
+
+h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.standfirst { color: var(--ink-soft); margin: 0; max-width: 62ch; font-size: 1.05rem; }
+
+.rule { height: 3px; background: var(--accent); margin-top: 6px; }
+
+/* ---------- controls ---------- */
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-head {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--rule-soft);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0;
+}
+
+.presets { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.preset {
+  font-family: var(--display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink-soft);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 6px 11px;
+  cursor: pointer;
+}
+.preset:hover { border-color: var(--accent); color: var(--accent); }
+.preset[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+:root[data-theme="dark"] .preset[aria-pressed="true"],
+:root:not([data-theme="light"]) .preset[aria-pressed="true"] { color: #0D1311; }
+.preset:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.sliders {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+  gap: 1px;
+  background: var(--rule-soft);
+}
+
+.slider {
+  background: var(--surface);
+  padding: 15px 22px 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.slider-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+
+.slider-name { font-family: var(--display); font-weight: 600; font-size: 0.88rem; }
+
+.slider-val {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+.slider-val.on { color: var(--accent); }
+
+.slider-note { font-size: 0.79rem; color: var(--ink-faint); line-height: 1.4; }
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 20px;
+  background: transparent;
+  cursor: pointer;
+  margin: 0;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px; background: var(--rule); border-radius: 2px;
+}
+input[type="range"]::-moz-range-track {
+  height: 4px; background: var(--rule); border-radius: 2px;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--accent); border: 2px solid var(--surface);
+  margin-top: -5.5px;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--accent); border: 2px solid var(--surface);
+}
+input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+/* ---------- leaderboard ---------- */
+
+.board { display: flex; flex-direction: column; gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule); }
+
+.row {
+  background: var(--surface);
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) 128px;
+  gap: 0 18px;
+  padding: 16px 22px;
+  align-items: start;
+  transition: background 140ms ease;
+}
+.row.lead { background: var(--accent-bg); }
+
+.rank {
+  font-family: var(--mono);
+  font-size: 1.15rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-faint);
+  padding-top: 1px;
+}
+.row.lead .rank { color: var(--accent); }
+
+.machine { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+
+.mname {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.008em;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px 9px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  padding: 1px 5px;
+  color: var(--ink-faint);
+}
+.tag.warn { color: var(--flag); }
+.tag.good { color: var(--accent); }
+
+.mspec { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.45; }
+.mwhy { font-size: 0.82rem; color: var(--ink-faint); }
+.mwhy b { color: var(--ink-soft); font-weight: 600; }
+
+.scorecol { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+
+.score {
+  font-family: var(--mono);
+  font-size: 1.32rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.bar { width: 100%; height: 7px; background: var(--rule-soft); border-radius: 0 4px 4px 0; overflow: hidden; }
+.bar > span {
+  display: block; height: 100%;
+  background: var(--accent);
+  border-radius: 0 4px 4px 0;
+  transition: width 220ms cubic-bezier(.4,0,.2,1);
+}
+
+.price {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+/* breakdown */
+
+.detail { grid-column: 1 / -1; padding-top: 14px; margin-top: 12px; border-top: 1px solid var(--rule-soft); }
+.bd { display: grid; grid-template-columns: repeat(auto-fit, minmax(184px, 1fr)); gap: 10px 22px; }
+.bd-item { display: flex; flex-direction: column; gap: 4px; }
+.bd-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 0.78rem; }
+.bd-name { color: var(--ink-soft); }
+.bd-num { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--ink-faint); font-size: 0.74rem; white-space: nowrap; }
+.bd-bar { height: 5px; background: var(--rule-soft); border-radius: 0 3px 3px 0; overflow: hidden; }
+.bd-bar > span { display: block; height: 100%; background: var(--accent-mid); border-radius: 0 3px 3px 0; }
+.bd-bar.off > span { background: var(--rule); }
+
+.expand {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--accent);
+  cursor: pointer;
+  align-self: flex-start;
+}
+.expand:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.mlink {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+.mlink:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.mlink:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.shop {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.pagenav {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  padding: 9px 14px;
+}
+.pagenav:hover { background: var(--accent); color: var(--paper); }
+:root[data-theme="dark"] .pagenav:hover,
+:root:not([data-theme="light"]) .pagenav:hover { color: #0D1311; }
+.pagenav:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ---------- prose ---------- */
+
+section { display: flex; flex-direction: column; gap: 16px; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex; align-items: center; gap: 12px; margin: 0;
+}
+.eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+
+h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+p { margin: 0; max-width: 70ch; }
+.measure { max-width: 70ch; }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+@media (max-width: 640px) {
+  body { padding: 0 14px 60px; font-size: 16px; }
+  .wrap { gap: 26px; }
+  header { padding-top: 20px; gap: 12px; }
+
+  /* toggle sits in the flow rather than floating over the board */
+  #theme-toggle { position: static !important; display: block; margin: 14px 0 -6px auto; }
+
+  .panel-head { padding: 14px 16px; }
+  .preset { min-height: 40px; padding: 8px 13px; font-size: 0.82rem; }
+  .pagenav { min-height: 44px; padding: 12px 15px; }
+
+  .slider { padding: 13px 16px 15px; }
+  .sliders { grid-template-columns: 1fr; }
+  /* taller invisible hit area, same visual track */
+  input[type="range"] { height: 34px; }
+  input[type="range"]::-webkit-slider-thumb { margin-top: -5.5px; width: 20px; height: 20px; }
+  input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; }
+
+  /* score stays beside the name so the board can be scanned */
+  /* score floats top-right; only the name line clears it, so spec text
+     gets the full column width instead of a narrow ragged one */
+  .row {
+    position: relative;
+    grid-template-columns: 26px minmax(0, 1fr);
+    gap: 0 10px;
+    padding: 13px 14px;
+  }
+  .mname { padding-right: 94px; }
+  .rank { font-size: 0.98rem; }
+  .machine { gap: 5px; }
+  .mname { font-size: 0.95rem; gap: 4px 7px; }
+  .mspec { font-size: 0.8rem; line-height: 1.35; }
+  .mwhy { font-size: 0.78rem; line-height: 1.35; }
+  .tag, .shop { font-size: 10.5px; }
+
+  .scorecol { position: absolute; top: 13px; right: 14px; width: 84px; align-items: flex-end; gap: 5px; margin-top: 0; }
+  .score { font-size: 1.15rem; }
+  .bar { width: 84px; height: 6px; }
+  .price { font-size: 0.72rem; }
+
+  .expand { min-height: 40px; display: flex; align-items: center; }
+  .mlink { display: inline-block; padding: 7px 0; }
+
+  footer a { display: inline-block; padding: 8px 0; }
+  .bd { grid-template-columns: 1fr 1fr; gap: 9px 14px; }
+  .bd-top { font-size: 0.72rem; }
+  .bd-num { font-size: 0.68rem; }
+}
+
+@media (max-width: 380px) {
+  .row { grid-template-columns: 22px minmax(0, 1fr); }
+  .mname { padding-right: 82px; }
+  .scorecol { width: 72px; }
+  .bar { width: 72px; }
+  .bd { grid-template-columns: 1fr; }
+}
+</style>
+
+<style>
+/* --- standalone additions (not needed inside the Claude artifact host) --- */
+html { -webkit-text-size-adjust: 100%; }
+img { max-width: 100%; height: auto; }
+
+#theme-toggle {
+  position: fixed; top: 16px; right: 16px; z-index: 50;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.13em;
+  text-transform: uppercase; color: var(--ink-soft);
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 2px; padding: 7px 11px; cursor: pointer; line-height: 1;
+}
+#theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+#theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.repo-note {
+  border-top: 1px solid var(--rule-soft); padding-top: 14px; margin-top: 4px;
+  font-size: 0.8rem; color: var(--ink-faint); font-family: var(--mono); line-height: 1.7;
+}
+
+.sibling-link {
+  display: inline-block; font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.11em; text-transform: uppercase; color: var(--accent);
+  border: 1px solid var(--accent); border-radius: 2px; padding: 8px 13px;
+  text-decoration: none; margin-top: 4px;
+}
+.sibling-link:hover { background: var(--accent); color: var(--paper); }
+
+@media (max-width: 640px) {
+  /* in the flow, not floating over the content */
+  #theme-toggle {
+    position: static; display: block; margin: 14px 0 -6px auto;
+    padding: 12px 14px; min-height: 42px;
+  }
+}
+
+@media print {
+  #theme-toggle, .sibling-link { display: none; }
+  body { background: #fff; color: #000; }
+  .tablebox, .tiers, .kit, .checklist, .linkgroups, .row { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<button id="theme-toggle" type="button">Dark</button>
+<div class="wrap">
+
+  <header>
+    <div class="dateline">
+      <span>Dhaka retail</span><span class="dot">/</span>
+      <span>August 2026</span><span class="dot">/</span>
+      <span>13 machines scored</span>
+    </div>
+    <h1>Office PC Scorecard</h1>
+    <p class="standfirst">Move the sliders to say what matters for your desk. The leaderboard re-ranks as you go. Prices are the <strong>complete desk</strong> — machine, monitor, UPS and peripherals — not just the box.</p>
+    <a class="pagenav" href="./index.html">&larr; Full guide &amp; research</a>
+    <div class="rule"></div>
+  </header>
+
+  <div class="panel">
+    <div class="panel-head">
+      <p class="panel-title">What matters to you</p>
+      <div class="presets" id="presets"></div>
+    </div>
+    <div class="sliders" id="sliders"></div>
+  </div>
+
+  <div class="board" id="board"></div>
+
+  <section>
+    <p class="eyebrow">How the scoring works</p>
+    <h2>Read this before you trust the ranking</h2>
+    <div class="measure stack">
+      <p><strong>Price is computed, everything else is judgement.</strong> The price score comes straight from the desk total — cheapest machine scores 10, dearest scores 2, everything else falls on the line between. The other seven scores are mine, assigned from the specifications and from what the Dhaka market looks like this month. They are defensible, not objective. If you disagree with one, the honest thing is to say so rather than let the arithmetic launder the opinion.</p>
+      <p><strong>The desk total is what you actually pay.</strong> Towers and mini PCs carry <span style="font-family:var(--mono)">৳17,000</span> of monitor, UPS and peripherals on top of the box. All-in-ones carry <span style="font-family:var(--mono)">৳6,700</span> because the screen is built in. Laptops carry <span style="font-family:var(--mono)">৳10,300</span> — external monitor and keyboard, but no UPS, because the battery is the UPS. That is why a laptop that looks dear next to a tower closes some of the gap, and why the all-in-one is less silly than its sticker suggests.</p>
+      <p><strong>A weight of zero removes an attribute entirely.</strong> If warranty genuinely does not matter to you, slide it to zero and watch what happens — the refurbished EliteBook climbs several places. That movement is the point of the tool: it shows you which of your priorities is actually driving the answer.</p>
+      <p><strong>Availability is the volatile one.</strong> Several of these machines were listed but unbuyable when I checked. That score will go stale faster than any other, so ring the shop before you let it decide anything.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Scores and prices reflect Dhaka retail listings collected 21–23 August 2026 and are indicative, not quotations. Full research, sourcing and the reasoning behind each machine is in the companion guide.</p>
+    <p><a href="./index.html">Dhaka Office PC Sourcing — the full guide</a></p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var ATTRS = [
+    { key: "price",   name: "Price",            note: "Total cost of the finished desk, not the box alone" },
+    { key: "cpu",     name: "Processor",        note: "Sustained speed with a big workbook and a database open" },
+    { key: "mem",     name: "Memory fitted",    note: "RAM in the machine as sold — expensive to add right now" },
+    { key: "storage", name: "Storage",          note: "Capacity and whether it is NVMe or a mechanical drive" },
+    { key: "warranty",name: "Warranty & service", note: "Length of cover and how easy the counter is to reach" },
+    { key: "avail",   name: "Available now",    note: "Can you actually buy one this week" },
+    { key: "upgrade", name: "Upgrade headroom", note: "Free RAM slots, drive bays, useful ports" },
+    { key: "size",    name: "Size & power draw",note: "Desk space, and how long a UPS keeps it alive" }
+  ];
+
+  // price = desk total in BDT; extras already included per machine type
+  var MACHINES = [
+    { name: "Qbits Lania DX2 i5", url: "https://qbits.com/product-details/18/Qbits-Lania-DX2-Core%E2%84%A2-i5-12400-16-GB-RAM-500-GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Core i5-12400 · 16 GB · 500 GB NVMe · mini PC", total: 64000,
+      tags: [["16 GB", "good"], ["stock unconfirmed", "warn"]],
+      s: { cpu: 9, mem: 9, storage: 8, warranty: 6, avail: 3, upgrade: 7, size: 8 } },
+
+    { name: "Qbits Lania X1 i7", url: "https://qbits.com/product-details/21/Qbits-Lania-X1-Intel%C2%AE-Core%E2%84%A2-i7-1165G7-16GB-DDR4-RAM-500GB-M.2-Western-Digital-NVMe-SSD", shop: "Qbits",   spec: "Core i7-1165G7 · 16 GB · 500 GB NVMe · Thunderbolt 4", total: 63999,
+      tags: [["16 GB", "good"], ["warranty unclear", "warn"]],
+      s: { cpu: 7, mem: 9, storage: 8, warranty: 5, avail: 4, upgrade: 8, size: 9 } },
+
+    { name: "Qbits Lania DX2 i3", url: "https://qbits.com/product-details/15/Qbits-Lania-DX2-Core%E2%84%A2-i3-12100-8-GB-RAM-500-GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Core i3-12100 · 8 GB · 500 GB NVMe · mini PC", total: 51999,
+      tags: [["price disputed", "warn"]],
+      s: { cpu: 7, mem: 4, storage: 8, warranty: 6, avail: 3, upgrade: 8, size: 8 } },
+
+    { name: "Qbits Lania Mini F", url: "https://qbits.com/product-details/55/Qbits-Lania-Mini-F-Intel-N95-Processor-16GB-DDR4-RAM-500GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Intel N95 · 16 GB · 500 GB NVMe · 0.35 kg", total: 44999,
+      tags: [["16 GB", "good"]],
+      s: { cpu: 4, mem: 9, storage: 8, warranty: 6, avail: 6, upgrade: 4, size: 10 } },
+
+    { name: "Qbits Mini F 256 GB", url: "https://qbits.com/product-details/60/Qbits-Lania-Mini-F-Intel-N95-Processor-16GB-DDR4-RAM-256GB-M.2-NVMe-SSD", shop: "Qbits", spec: "Intel N95 · 16 GB · 256 GB NVMe · 0.35 kg", total: 41999,
+      tags: [["16 GB", "good"], ["cheapest desk", "good"]],
+      s: { cpu: 4, mem: 9, storage: 6, warranty: 6, avail: 6, upgrade: 4, size: 10 } },
+
+    { name: "Walton i5-10400", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand",     spec: "Core i5-10400 · 8 GB · 256 GB SSD + 1 TB HDD · tower", total: 65550,
+      tags: [["nationwide service", "good"]],
+      s: { cpu: 7, mem: 4, storage: 6, warranty: 9, avail: 9, upgrade: 9, size: 3 } },
+
+    { name: "Walton i3-10100", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand",     spec: "Core i3-10100 · 8 GB · 256 GB SSD + 1 TB HDD · tower", total: 56950,
+      tags: [["nationwide service", "good"]],
+      s: { cpu: 5, mem: 4, storage: 6, warranty: 9, avail: 9, upgrade: 9, size: 3 } },
+
+    { name: "Star Tech i5-12400", url: "https://www.startech.com.bd/intel-12th-gen-core-i5-12400-desktop-pc", shop: "Star Tech",  spec: "Core i5-12400 · RAM not stated · tower", total: 68500,
+      tags: [["walk in and buy", "good"], ["RAM unstated", "warn"]],
+      s: { cpu: 9, mem: 4, storage: 6, warranty: 7, avail: 10, upgrade: 9, size: 3 } },
+
+    { name: "Star Tech i3-12100", url: "https://www.startech.com.bd/intel-core-i3-12100-12th-gen-budget-desktop-pc", shop: "Star Tech",  spec: "Core i3-12100 · RAM not stated · tower", total: 60600,
+      tags: [["walk in and buy", "good"], ["RAM unstated", "warn"]],
+      s: { cpu: 7, mem: 4, storage: 6, warranty: 7, avail: 10, upgrade: 9, size: 3 } },
+
+    { name: "Eastern IT i5-12400", url: "https://www.eit.com.bd/desktop", shop: "Eastern IT", spec: "Core i5-12400 · 8 GB · 256 GB SSD · tower", total: 64700,
+      tags: [],
+      s: { cpu: 9, mem: 4, storage: 6, warranty: 6, avail: 8, upgrade: 9, size: 3 } },
+
+    { name: "Dell Pro Tower", url: "https://www.eit.com.bd/desktop", shop: "Eastern IT",      spec: "Core i3-14100 · 8 GB DDR5 · 512 GB SSD · tower", total: 85000,
+      tags: [["brand warranty", "good"]],
+      s: { cpu: 7, mem: 4, storage: 8, warranty: 9, avail: 7, upgrade: 8, size: 4 } },
+
+    { name: "Walton all-in-one", url: "https://www.techlandbd.com/computers/desktop-computer", shop: "TechLand",   spec: "Core i3 12th gen · 16 GB · 512 GB SSD · screen built in", total: 68250,
+      tags: [["16 GB", "good"], ["monitor included", "good"]],
+      s: { cpu: 7, mem: 9, storage: 8, warranty: 9, avail: 8, upgrade: 4, size: 7 } },
+
+    { name: "HP EliteBook 840 G9", url: "https://www.bdstall.com/details/hp-elitebook-840-g9-core-i5-12th-gen-512gb-ssd-98287/", shop: "BDStall", spec: "Core i5 12th gen · 16 GB · 512 GB · refurbished import", total: 59300,
+      tags: [["16 GB", "good"], ["no maker warranty", "warn"]],
+      s: { cpu: 8, mem: 9, storage: 8, warranty: 2, avail: 5, upgrade: 5, size: 9 } }
+  ];
+
+  var PRESETS = {
+    "Office desk":     { price: 4, cpu: 4, mem: 5, storage: 3, warranty: 3, avail: 4, upgrade: 2, size: 2 },
+    "Cheapest":        { price: 5, cpu: 2, mem: 3, storage: 2, warranty: 2, avail: 3, upgrade: 1, size: 1 },
+    "Fastest":         { price: 1, cpu: 5, mem: 5, storage: 4, warranty: 2, avail: 2, upgrade: 3, size: 1 },
+    "Buy it today":    { price: 3, cpu: 3, mem: 3, storage: 2, warranty: 4, avail: 5, upgrade: 2, size: 1 },
+    "Load-shedding":   { price: 3, cpu: 3, mem: 3, storage: 2, warranty: 3, avail: 3, upgrade: 1, size: 5 }
+  };
+
+  var weights = Object.assign({}, PRESETS["Office desk"]);
+  var activePreset = "Office desk";
+  var openRows = {};
+
+  // --- price score: cheapest 10, dearest 2, linear between
+  var totals = MACHINES.map(function (m) { return m.total; });
+  var lo = Math.min.apply(null, totals), hi = Math.max.apply(null, totals);
+  MACHINES.forEach(function (m) {
+    m.s.price = hi === lo ? 10 : 10 - 8 * (m.total - lo) / (hi - lo);
+  });
+
+  function taka(n) { return "৳" + n.toLocaleString("en-US"); }
+
+  function scoreOf(m) {
+    var num = 0, den = 0;
+    ATTRS.forEach(function (a) {
+      var w = weights[a.key];
+      num += w * m.s[a.key];
+      den += w;
+    });
+    return den === 0 ? 0 : num / den;
+  }
+
+  // the two attributes contributing most to this machine's score
+  function drivers(m) {
+    return ATTRS
+      .filter(function (a) { return weights[a.key] > 0; })
+      .map(function (a) { return { name: a.name, c: weights[a.key] * m.s[a.key] }; })
+      .sort(function (x, y) { return y.c - x.c; })
+      .slice(0, 2)
+      .map(function (d) { return d.name.toLowerCase(); });
+  }
+
+  function buildPresets() {
+    var host = document.getElementById("presets");
+    host.innerHTML = "";
+    Object.keys(PRESETS).forEach(function (label) {
+      var b = document.createElement("button");
+      b.className = "preset";
+      b.type = "button";
+      b.textContent = label;
+      b.setAttribute("aria-pressed", label === activePreset ? "true" : "false");
+      b.addEventListener("click", function () {
+        weights = Object.assign({}, PRESETS[label]);
+        activePreset = label;
+        syncSliders();
+        buildPresets();
+        render();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  function buildSliders() {
+    var host = document.getElementById("sliders");
+    host.innerHTML = "";
+    ATTRS.forEach(function (a) {
+      var wrap = document.createElement("div");
+      wrap.className = "slider";
+
+      var top = document.createElement("div");
+      top.className = "slider-top";
+      var nm = document.createElement("span");
+      nm.className = "slider-name";
+      nm.textContent = a.name;
+      var val = document.createElement("span");
+      val.className = "slider-val";
+      val.id = "val-" + a.key;
+      top.appendChild(nm); top.appendChild(val);
+
+      var input = document.createElement("input");
+      input.type = "range";
+      input.min = "0"; input.max = "5"; input.step = "1";
+      input.value = String(weights[a.key]);
+      input.id = "sl-" + a.key;
+      input.setAttribute("aria-label", a.name + " importance, 0 to 5");
+      input.addEventListener("input", function () {
+        weights[a.key] = Number(input.value);
+        activePreset = null;
+        buildPresets();
+        syncSliders();
+        render();
+      });
+
+      var note = document.createElement("p");
+      note.className = "slider-note";
+      note.textContent = a.note;
+
+      wrap.appendChild(top);
+      wrap.appendChild(input);
+      wrap.appendChild(note);
+      host.appendChild(wrap);
+    });
+    syncSliders();
+  }
+
+  var WORDS = ["ignored", "barely", "minor", "matters", "important", "decisive"];
+
+  function syncSliders() {
+    ATTRS.forEach(function (a) {
+      var w = weights[a.key];
+      var sl = document.getElementById("sl-" + a.key);
+      if (sl && Number(sl.value) !== w) sl.value = String(w);
+      var v = document.getElementById("val-" + a.key);
+      if (v) {
+        v.textContent = WORDS[w];
+        v.className = "slider-val" + (w > 0 ? " on" : "");
+      }
+    });
+  }
+
+  function render() {
+    var ranked = MACHINES
+      .map(function (m) { return { m: m, sc: scoreOf(m) }; })
+      .sort(function (a, b) { return b.sc - a.sc || a.m.total - b.m.total; });
+
+    var board = document.getElementById("board");
+    board.innerHTML = "";
+
+    var allZero = ATTRS.every(function (a) { return weights[a.key] === 0; });
+
+    ranked.forEach(function (entry, i) {
+      var m = entry.m, sc = entry.sc;
+      var row = document.createElement("div");
+      row.className = "row" + (i === 0 && !allZero ? " lead" : "");
+
+      var rank = document.createElement("div");
+      rank.className = "rank";
+      rank.textContent = allZero ? "–" : String(i + 1);
+
+      var mid = document.createElement("div");
+      mid.className = "machine";
+
+      var nm = document.createElement("div");
+      nm.className = "mname";
+      var link = document.createElement("a");
+      link.className = "mlink";
+      link.href = m.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = m.name;
+      link.title = "Open the " + m.shop + " listing in a new tab";
+      nm.appendChild(link);
+      var at = document.createElement("span");
+      at.className = "shop";
+      at.textContent = m.shop;
+      nm.appendChild(at);
+      m.tags.forEach(function (t) {
+        var s = document.createElement("span");
+        s.className = "tag " + t[1];
+        s.textContent = t[0];
+        nm.appendChild(s);
+      });
+
+      var spec = document.createElement("div");
+      spec.className = "mspec";
+      spec.textContent = m.spec;
+
+      var why = document.createElement("div");
+      why.className = "mwhy";
+      if (allZero) {
+        why.textContent = "Every attribute is set to zero — nothing to rank on.";
+      } else {
+        var d = drivers(m);
+        why.innerHTML = "Ranks here mainly on <b>" + d.join("</b> and <b>") + "</b>.";
+      }
+
+      var btn = document.createElement("button");
+      btn.className = "expand";
+      btn.type = "button";
+      btn.textContent = openRows[m.name] ? "Hide breakdown" : "Show breakdown";
+      btn.setAttribute("aria-expanded", openRows[m.name] ? "true" : "false");
+      btn.addEventListener("click", function () {
+        openRows[m.name] = !openRows[m.name];
+        render();
+      });
+
+      mid.appendChild(nm);
+      mid.appendChild(spec);
+      mid.appendChild(why);
+      mid.appendChild(btn);
+
+      var col = document.createElement("div");
+      col.className = "scorecol";
+      var sn = document.createElement("div");
+      sn.className = "score";
+      sn.textContent = allZero ? "–" : sc.toFixed(1);
+      var bar = document.createElement("div");
+      bar.className = "bar";
+      var fill = document.createElement("span");
+      fill.style.width = (allZero ? 0 : (sc / 10) * 100) + "%";
+      bar.appendChild(fill);
+      var pr = document.createElement("div");
+      pr.className = "price";
+      pr.textContent = taka(m.total) + " desk";
+      col.appendChild(sn); col.appendChild(bar); col.appendChild(pr);
+
+      row.appendChild(rank);
+      row.appendChild(mid);
+      row.appendChild(col);
+
+      if (openRows[m.name]) {
+        var det = document.createElement("div");
+        det.className = "detail";
+        var bd = document.createElement("div");
+        bd.className = "bd";
+        ATTRS.forEach(function (a) {
+          var w = weights[a.key], v = m.s[a.key];
+          var item = document.createElement("div");
+          item.className = "bd-item";
+          var t = document.createElement("div");
+          t.className = "bd-top";
+          var n1 = document.createElement("span");
+          n1.className = "bd-name";
+          n1.textContent = a.name;
+          var n2 = document.createElement("span");
+          n2.className = "bd-num";
+          n2.textContent = v.toFixed(1) + " / 10 · ×" + w;
+          t.appendChild(n1); t.appendChild(n2);
+          var b2 = document.createElement("div");
+          b2.className = "bd-bar" + (w === 0 ? " off" : "");
+          var f2 = document.createElement("span");
+          f2.style.width = (v / 10) * 100 + "%";
+          b2.appendChild(f2);
+          item.appendChild(t); item.appendChild(b2);
+          bd.appendChild(item);
+        });
+        det.appendChild(bd);
+        row.appendChild(det);
+      }
+
+      board.appendChild(row);
+    });
+  }
+
+  buildPresets();
+  buildSliders();
+  render();
+})();
+</script>
+
+<script>
+(function () {
+  var btn = document.getElementById('theme-toggle');
+  var root = document.documentElement;
+  function systemDark() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function label() {
+    var t = root.getAttribute('data-theme');
+    var isDark = t === 'dark' || (!t && systemDark());
+    btn.textContent = isDark ? 'Light' : 'Dark';
+    btn.setAttribute('aria-label', 'Switch to ' + (isDark ? 'light' : 'dark') + ' theme');
+  }
+  btn.addEventListener('click', function () {
+    var t = root.getAttribute('data-theme');
+    var isDark = t === 'dark' || (!t && systemDark());
+    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    label();
+  });
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', label);
+  }
+  label();
+})();
+</script>
+</body>
+</html>
