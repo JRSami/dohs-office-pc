@@ -1,79 +1,51 @@
 # Dhaka Office PC Sourcing
 
-A single-page buying guide for equipping one office staff desk in Dhaka — desktop, mini PC or laptop, plus monitor, UPS and the software licence, with retail prices in taka.
+Buying research for equipping one office staff desk in Dhaka: what machine to get, what it costs once the monitor, power backup and software licence are included, and where to buy it.
 
-Written for a small business kitting out a staff member who spends the day in Excel, Word, email and a database front-end.
+Aimed at a small business kitting out a staff member who spends the day in Excel, Word, email and a database front-end. All prices in Bangladeshi taka, collected from local retailers in August 2026.
 
-**Live page:** `https://<your-username>.github.io/<repo-name>/`
-_(fill this in after you enable Pages — see below)_
+## Contents
 
----
-
-## What's in the repo
-
-| File | What it is |
+| File | Description |
 |---|---|
-| `index.html` | The whole guide. Self-contained — no build step, no dependencies, no JavaScript framework. Open it in any browser. |
-| `scorecard.html` | Interactive scorecard. Set how much price, speed, memory, warranty, availability and the rest matter to you, and thirteen machines re-rank live. |
-| `README.md` | This file. |
+| `index.html` | The guide. Machine comparisons, memory and storage market context, software licensing options, total cost of ownership, and a linked directory of every product mentioned. |
+| `scorecard.html` | Interactive scorecard. Weight eight attributes to taste and thirteen machines re-rank live. |
 
-The two pages link to each other, so uploading both gives you a small two-page site.
+Both are self-contained static HTML — no build step, no dependencies, no framework. Open either file directly in a browser, or serve the folder from any static host. They link to each other with relative paths.
 
-The page is a single HTML file with the CSS inlined. The only external request is to Google Fonts for two typefaces, and it degrades to system fonts if that's blocked. It follows the reader's light/dark preference and has a manual toggle in the top right.
+## What the guide covers
 
----
+- **Hardware** — assembled towers, brand pre-builts, mini PCs, all-in-ones and laptops, with configurations and current retail prices
+- **The memory market** — why factory-fitted RAM matters more than usual right now, and a survey of which pre-builts actually ship with 16 GB
+- **Software** — Microsoft 365 plans, one-time Office licences, Google Workspace and free alternatives, priced through Bangladeshi resellers
+- **Total cost** — three-year cost per seat across several hardware and software combinations
+- **Practical checks** — what to confirm before paying, and where each item can be bought
 
-## Publishing it on GitHub Pages
+## How the scorecard scores
 
-### Option A — through the GitHub website (no command line)
+Eight attributes: price, processor, memory fitted, storage, warranty and service, availability, upgrade headroom, and size and power draw. Each carries a weight from 0 (ignored) to 5 (decisive), and the displayed score is the weighted mean of the machine's attribute scores.
 
-1. Go to <https://github.com/new> and create a repository. A public repo is required for free GitHub Pages. Name it something like `dhaka-office-pc-guide`.
-2. On the empty repo page, click **uploading an existing file**.
-3. Drag in `index.html`, `scorecard.html` and `README.md`, then click **Commit changes**.
-4. Go to **Settings → Pages** in that repo.
-5. Under **Build and deployment → Source**, choose **Deploy from a branch**. Set the branch to `main` and the folder to `/ (root)`. Click **Save**.
-6. Wait about a minute, then reload the Settings → Pages screen. Your URL appears at the top: `https://<your-username>.github.io/<repo-name>/`
+The price axis uses the **complete desk cost**, not the machine alone. Towers and mini PCs include a monitor, UPS and peripherals; all-in-ones exclude the monitor; laptops exclude the UPS. That is the only basis on which the formats compare fairly.
 
-That URL is the link you share. Anyone can open it — no GitHub account needed on their end.
+Only the price score is computed. The other seven are editorial judgements from published specifications and observed market conditions — defensible, but not objective. Setting an attribute's weight to zero removes it from the calculation entirely, which is the quickest way to see which priority is driving a given ranking.
 
-### Option B — from the command line
+## Data and currency
 
-```bash
-cd dhaka-office-pc-guide
-git init
-git add .
-git commit -m "Dhaka office PC sourcing guide"
-git branch -M main
-git remote add origin https://github.com/<your-username>/<repo-name>.git
-git push -u origin main
-```
+Prices were collected between 21 and 23 August 2026 from Star Tech, Ryans, TechLand BD, BDStall, Eastern IT, Qbits, Pickaboo, Tofa, Daraz and LKEY. They are indicative, not quotations.
 
-Then follow steps 4–6 above to turn Pages on.
+Two caveats worth carrying forward:
 
-### Updating it later
+- Memory and SSD prices were mid-spike during collection and move faster than anything else on the page.
+- Several retailers render price and stock only after page scripts run, so a listing can appear complete while the item is unavailable. Availability claims here should be confirmed by phone before being relied on.
 
-Edit `index.html`, commit, and push. GitHub Pages redeploys automatically, usually within a minute. The URL never changes, so a link you've already shared stays current.
+## Correcting a price
 
-```bash
-git add index.html
-git commit -m "Update monitor prices, checked 12 September"
-git push
-```
+Prices go stale quickly. Edit the relevant figure in `index.html` (and the `MACHINES` array in `scorecard.html` if the change affects a scored machine), then open a pull request. **Note the date you checked it in the commit message** — that is what tells the next reader how much to trust the number.
 
----
+## Scope
 
-## Keeping the prices honest
-
-Every figure in the guide is a Bangladeshi retail listing collected on **21 August 2026**. Hardware prices in this market move week to week, and memory and SSD prices are unusually volatile right now — treat everything as indicative, not as a quotation.
-
-If you correct a figure, please note the date you checked it in the commit message. That way anyone reading the page later knows how stale it is.
-
-**Sources used:** [Star Tech](https://www.startech.com.bd/), [Ryans](https://www.ryans.com/), [TechLand BD](https://www.techlandbd.com/), [BDStall](https://www.bdstall.com/), [Eastern IT](https://www.eit.com.bd/desktop), [Qbits](https://qbits.com/), [Tofa](https://tofa.com.bd/), [Pickaboo](https://www.pickaboo.com/), [Daraz](https://www.daraz.com.bd/), [LKEY](https://lkey.info/) for Microsoft and Google licensing.
-
-## A note on scope
-
-This is one person's research write-up, not a sponsored comparison and not a substitute for a quotation from a shop. No retailer or brand mentioned had any input into it. Prices for the same item genuinely differ between shops in Dhaka — check two before you buy.
+Independent research. No retailer or manufacturer mentioned had any input, and none of the links are affiliate links. Prices for the same item genuinely differ between shops in Dhaka; check more than one before buying.
 
 ## Licence
 
-Text and layout are free to reuse and adapt. Please keep the "prices as of" date visible if you republish it, so readers can judge how current it is.
+Free to reuse and adapt. If republishing, keep the collection date visible so readers can judge how current the figures are.
