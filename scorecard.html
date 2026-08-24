@@ -267,6 +267,15 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
 .tag.good { color: var(--accent); }
 
 .mspec { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.45; }
+
+.mnote {
+  font-size: 0.81rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--flag);
+  padding-left: 10px;
+  max-width: 68ch;
+}
 .mwhy { font-size: 0.82rem; color: var(--ink-faint); }
 .mwhy b { color: var(--ink-soft); font-weight: 600; }
 
@@ -296,6 +305,53 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
   color: var(--ink-soft);
   white-space: nowrap;
 }
+
+.row.second { background: color-mix(in srgb, var(--accent-bg) 55%, var(--surface)); }
+.row.second .rank { color: var(--accent-mid); }
+
+.pickbadge {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 2px;
+  background: var(--accent);
+  color: var(--paper);
+  white-space: nowrap;
+}
+:root[data-theme="dark"] .pickbadge,
+:root:not([data-theme="light"]) .pickbadge { color: #0D1311; }
+.pickbadge.two { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+
+/* the top-two comparison strip */
+.compare {
+  border: 1px solid var(--accent);
+  border-top-width: 3px;
+  background: var(--surface);
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.compare-head {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.compare-lede {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  line-height: 1.35;
+  letter-spacing: -0.012em;
+  margin: 0;
+  max-width: 54ch;
+}
+.compare p { font-size: 0.9rem; color: var(--ink-soft); margin: 0; max-width: 68ch; }
+.compare .tk { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 500; color: var(--ink); }
 
 /* breakdown */
 
@@ -489,7 +545,8 @@ footer {
   .mname { font-size: 0.95rem; gap: 4px 7px; }
   .mspec { font-size: 0.8rem; line-height: 1.35; }
   .mwhy { font-size: 0.78rem; line-height: 1.35; }
-  .tag, .shop { font-size: 10.5px; }
+  .mnote { font-size: 0.78rem; line-height: 1.4; padding-left: 8px; }
+  .tag, .shop, .pickbadge { font-size: 10.5px; }
 
   .scorecol { position: absolute; top: 13px; right: 14px; width: 84px; align-items: flex-end; gap: 5px; margin-top: 0; }
   .score { font-size: 1.15rem; }
@@ -565,10 +622,11 @@ img { max-width: 100%; height: auto; }
     <div class="dateline">
       <span>Dhaka retail</span><span class="dot">/</span>
       <span>August 2026</span><span class="dot">/</span>
-      <span>14 machines scored</span>
+      <span>20 machines scored</span>
     </div>
     <h1>Office PC Scorecard</h1>
     <p class="standfirst">Move the sliders to say what matters for your desk. The leaderboard re-ranks as you go. Prices are the <strong>complete desk</strong> — machine, monitor, UPS and peripherals — not just the box.</p>
+    <p class="standfirst"><strong>Running cost is not in these figures either.</strong> The AMD APU towers here — Ryzen 3 3200G, Ryzen 5 3400G, Ryzen 5 5600G — have faster processors than the N95 mini PCs, but they are 65&nbsp;W chips in full-size cases. Reckon on roughly 45–50&nbsp;W more at the wall than a mini PC, which is about 10&nbsp;kWh a month for a normal office day, or <strong>৳130–140 a month</strong> at commercial off-peak rates — near <strong>৳5,000 over three years</strong>, plus noticeably less UPS runtime during a power cut.</p>
     <p class="standfirst"><strong>Office software is not included in any figure here.</strong> Budget roughly <strong>৳4,440 per person per year</strong> for Microsoft 365 Business Basic, which covers business email on your own domain and 1&nbsp;TB of OneDrive. It is sold by local resellers — Star Tech, Ryans and Microsoft partners such as LKEY — and pairs with free ONLYOFFICE on the desktop, since Basic licenses the web and mobile apps only.</p>
     <a class="pagenav" href="./index.html">&larr; Full guide &amp; research</a>
     <div class="rule"></div>
@@ -583,6 +641,8 @@ img { max-width: 100%; height: auto; }
   </div>
 
   <div class="board" id="board"></div>
+
+  <div class="compare" id="compare"></div>
 
   <section>
     <p class="eyebrow">How the scoring works</p>
@@ -642,6 +702,36 @@ img { max-width: 100%; height: auto; }
     { name: "Qbits Mini F 256 GB", base: 24999, kind: "desktop", url: "https://qbits.com/product-details/60/Qbits-Lania-Mini-F-Intel-N95-Processor-16GB-DDR4-RAM-256GB-M.2-NVMe-SSD", shop: "Qbits", spec: "Intel N95 · 16 GB · 256 GB NVMe · 0.35 kg", total: 41999,
       tags: [["16 GB", "good"], ["cheapest desk", "good"]],
       s: { cpu: 4, mem: 9, storage: 6, warranty: 6, avail: 6, upgrade: 4, size: 10 } },
+
+    { name: "Star Tech Ryzen 5 3400G", base: 36799, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-5-3400g-processor-gaming-pc", shop: "Star Tech", spec: "Ryzen 5 3400G \u00b7 4C/8T \u00b7 RAM not stated \u00b7 gaming tower", total: 53799,
+      note: "Thirstiest option here. A 65 W chip in a gaming-spec case, so a larger PSU and possibly a discrete card \u2014 reckon on 50 W or more above a mini PC, roughly \u09f31,700 a year in extra electricity, and the shortest UPS runtime of any machine listed.",
+      tags: [["in stock", "good"], ["highest running cost", "warn"]],
+      s: { cpu: 6, mem: 4, storage: 5, warranty: 7, avail: 10, upgrade: 9, size: 2 } },
+
+    { name: "Star Tech Ryzen 5 2400G", base: 33499, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-5-2400g-desktop-pc", shop: "Star Tech", spec: "Ryzen 5 2400G \u00b7 4C/8T \u00b7 RAM not stated \u00b7 tower", total: 50499,
+      note: "Four cores and eight threads beat the N95 on paper, but it is a 65 W part on an older process \u2014 about 45 W more at the wall, near \u09f3130 a month or \u09f31,600 a year on a commercial tariff.",
+      tags: [["in stock", "good"], ["thirsty", "warn"]],
+      s: { cpu: 6, mem: 4, storage: 5, warranty: 7, avail: 10, upgrade: 9, size: 2 } },
+
+    { name: "Star Tech Ryzen 3 2200G", base: 30000, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-3-2200g-desktop-pc", shop: "Star Tech", spec: "Ryzen 3 2200G \u00b7 4C/4T \u00b7 RAM not stated \u00b7 tower", total: 47000,
+      note: "The cheapest AMD tower in stock. Four real cores, but a 65 W chip against the N95's 15 W \u2014 about \u09f31,600 a year more in electricity, which cancels the purchase saving inside two years.",
+      tags: [["in stock", "good"], ["thirsty", "warn"]],
+      s: { cpu: 5, mem: 4, storage: 5, warranty: 7, avail: 10, upgrade: 9, size: 2 } },
+
+    { name: "Walton Ryzen 3 3200G", base: 29000, kind: "desktop", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand", spec: "Ryzen 3 3200G \u00b7 8 GB \u00b7 128 GB SSD + 1 TB HDD \u00b7 tower", total: 46000,
+      note: "Faster than the N95, but a 65 W chip plus a mechanical hard drive \u2014 around \u09f31,600 a year in extra electricity, and the 1 TB HDD adds both draw and noise.",
+      tags: [["thirsty", "warn"], ["nationwide service", "good"]],
+      s: { cpu: 6, mem: 4, storage: 5, warranty: 9, avail: 8, upgrade: 9, size: 3 } },
+
+    { name: "Star Tech 3400G (delisted)", base: 27100, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-5-3400g-processor-desktop-pc", shop: "Star Tech", spec: "Ryzen 5 3400G \u00b7 RAM not stated \u00b7 tower", total: 44100,
+      note: "Same 65 W class as the in-stock 3400G gaming build, at a lower price \u2014 but discontinued, so treat it as a reference point rather than an option.",
+      tags: [["thirsty", "warn"], ["discontinued", "warn"]],
+      s: { cpu: 6, mem: 4, storage: 5, warranty: 7, avail: 1, upgrade: 9, size: 3 } },
+
+    { name: "Star Tech 5600G (delisted)", base: 34450, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-5-5600g-desktop-pc", shop: "Star Tech", spec: "Ryzen 5 5600G \u00b7 6 cores \u00b7 RAM not stated \u00b7 tower", total: 51450,
+      note: "The fastest chip per taka anywhere on this page, and still a 65 W part \u2014 about \u09f31,600 a year in extra electricity. Discontinued at Star Tech; worth chasing elsewhere if raw speed is the priority.",
+      tags: [["thirsty", "warn"], ["discontinued", "warn"]],
+      s: { cpu: 8, mem: 4, storage: 5, warranty: 7, avail: 1, upgrade: 9, size: 3 } },
 
     { name: "Walton i5-10400", base: 48550, kind: "desktop", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand",     spec: "Core i5-10400 · 8 GB · 256 GB SSD + 1 TB HDD · tower", total: 65550,
       tags: [["nationwide service", "good"]],
@@ -830,7 +920,7 @@ img { max-width: 100%; height: auto; }
     ranked.forEach(function (entry, i) {
       var m = entry.m, sc = entry.sc;
       var row = document.createElement("div");
-      row.className = "row" + (i === 0 && !allZero ? " lead" : "");
+      row.className = "row" + (allZero ? "" : (i === 0 ? " lead" : (i === 1 ? " second" : "")));
 
       var rank = document.createElement("div");
       rank.className = "rank";
@@ -841,6 +931,12 @@ img { max-width: 100%; height: auto; }
 
       var nm = document.createElement("div");
       nm.className = "mname";
+      if (!allZero && i < 2) {
+        var badge = document.createElement("span");
+        badge.className = "pickbadge" + (i === 1 ? " two" : "");
+        badge.textContent = i === 0 ? "Top pick" : "Runner-up";
+        nm.appendChild(badge);
+      }
       var link = document.createElement("a");
       link.className = "mlink";
       link.href = m.url;
@@ -864,6 +960,13 @@ img { max-width: 100%; height: auto; }
       spec.className = "mspec";
       spec.textContent = m.spec;
 
+      var noteEl = null;
+      if (m.note) {
+        noteEl = document.createElement("div");
+        noteEl.className = "mnote";
+        noteEl.textContent = m.note;
+      }
+
       var why = document.createElement("div");
       why.className = "mwhy";
       if (allZero) {
@@ -885,6 +988,7 @@ img { max-width: 100%; height: auto; }
 
       mid.appendChild(nm);
       mid.appendChild(spec);
+      if (noteEl) mid.appendChild(noteEl);
       mid.appendChild(why);
       mid.appendChild(btn);
 
@@ -979,6 +1083,78 @@ img { max-width: 100%; height: auto; }
 
       board.appendChild(row);
     });
+
+    renderCompare(ranked, allZero);
+  }
+
+  // Why the top two sit where they do — and what the gap between them buys.
+  function renderCompare(ranked, allZero) {
+    var box = document.getElementById("compare");
+    box.innerHTML = "";
+    if (allZero || ranked.length < 2) { box.style.display = "none"; return; }
+    box.style.display = "flex";
+
+    var a = ranked[0], bb = ranked[1];
+    // positive => the runner-up costs MORE than the leader, i.e. the leader is also cheaper
+    var priceGap = bb.m.total - a.m.total;
+    var scoreGap = a.sc - bb.sc;
+
+    var head = document.createElement("p");
+    head.className = "compare-head";
+    head.textContent = "The top two, compared";
+
+    var lede = document.createElement("p");
+    lede.className = "compare-lede";
+
+    var body = document.createElement("p");
+
+    function joinList(arr) {
+      if (arr.length === 0) return "";
+      if (arr.length === 1) return arr[0];
+      return arr.slice(0, -1).join(", ") + " and " + arr[arr.length - 1];
+    }
+
+    var diffs = ATTRS.filter(function (at) {
+      return weights[at.key] > 0 && Math.abs(a.m.s[at.key] - bb.m.s[at.key]) >= 0.5;
+    }).map(function (at) {
+      return {
+        name: at.name.toLowerCase(),
+        favours: a.m.s[at.key] > bb.m.s[at.key] ? "top" : "runner",
+        weighted: Math.abs(a.m.s[at.key] - bb.m.s[at.key]) * weights[at.key]
+      };
+    }).sort(function (x, y) { return y.weighted - x.weighted; });
+
+    var forTop = diffs.filter(function (d) { return d.favours === "top"; }).map(function (d) { return d.name; });
+    var forRunner = diffs.filter(function (d) { return d.favours === "runner"; }).map(function (d) { return d.name; });
+
+    if (priceGap > 0) {
+      lede.textContent = a.m.name + " leads and is " + taka(priceGap) + " cheaper than " + bb.m.name + ".";
+    } else if (priceGap < 0) {
+      lede.textContent = bb.m.name + " is " + taka(-priceGap) + " cheaper, yet " + a.m.name + " still leads.";
+    } else {
+      lede.textContent = a.m.name + " and " + bb.m.name + " cost the same, and " + a.m.name + " leads.";
+    }
+
+    var sentences = [];
+    sentences.push("Scores differ by " + scoreGap.toFixed(2) + " — " +
+      a.m.name + " at " + a.sc.toFixed(1) + " against " + bb.m.name + " at " + bb.sc.toFixed(1) + ".");
+    if (forTop.length) sentences.push("The lead comes from " + joinList(forTop) + ".");
+    if (forRunner.length) sentences.push("The runner-up is ahead on " + joinList(forRunner) + ".");
+
+    // only meaningful when the leader is the dearer machine
+    if (priceGap < 0 && forTop.length) {
+      var extra = -priceGap;
+      var pct = (extra / bb.m.total) * 100;
+      var howMuch = pct < 1 ? "under 1%" : "about " + Math.round(pct) + "%";
+      sentences.push("Put plainly: " + howMuch + " more on the desk total (" + taka(extra) +
+        ") buys the better " + forTop[0] + ", and on these weightings that trade is worth making.");
+    }
+    sentences.push("Both are sound buys — choose between them on the attribute you care about most.");
+    body.textContent = sentences.join(" ");
+
+    box.appendChild(head);
+    box.appendChild(lede);
+    box.appendChild(body);
   }
 
   buildPresets();
