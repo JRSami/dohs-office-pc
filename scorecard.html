@@ -621,11 +621,12 @@ img { max-width: 100%; height: auto; }
   <header>
     <div class="dateline">
       <span>Dhaka retail</span><span class="dot">/</span>
-      <span>August 2026</span><span class="dot">/</span>
+      <span>Prices re-checked 23 August 2026</span><span class="dot">/</span>
       <span>20 machines scored</span>
     </div>
     <h1>Office PC Scorecard</h1>
-    <p class="standfirst">Move the sliders to say what matters for your desk. The leaderboard re-ranks as you go. Prices are the <strong>complete desk</strong> — machine, monitor, UPS and peripherals — not just the box.</p>
+    <p class="standfirst">Move the sliders to say what matters for your desk. The leaderboard re-ranks as you go. Prices are the <strong>complete desk</strong> — machine, plus a 22-inch IPS monitor (৳8,800), an Apollo 650&nbsp;VA UPS (৳3,750) and a Logitech MK215 keyboard and mouse (৳2,050) — not just the box.</p>
+    <p class="standfirst"><strong>The UPS is a 650&nbsp;VA / 300&nbsp;W unit, which changes the power argument.</strong> It carries a 15&nbsp;W mini PC and a monitor for a long stretch, but a 65&nbsp;W tower plus monitor sits near a third of its capacity and will run for a fraction as long. If you choose one of the AMD towers below, budget for a larger UPS than the one priced here.</p>
     <p class="standfirst"><strong>Running cost is not in these figures either.</strong> The AMD APU towers here — Ryzen 3 3200G, Ryzen 5 3400G, Ryzen 5 5600G — have faster processors than the N95 mini PCs, but they are 65&nbsp;W chips in full-size cases. Reckon on roughly 45–50&nbsp;W more at the wall than a mini PC, which is about 10&nbsp;kWh a month for a normal office day, or <strong>৳130–140 a month</strong> at commercial off-peak rates — near <strong>৳5,000 over three years</strong>, plus noticeably less UPS runtime during a power cut.</p>
     <p class="standfirst"><strong>Office software is not included in any figure here.</strong> Budget roughly <strong>৳4,440 per person per year</strong> for Microsoft 365 Business Basic, which covers business email on your own domain and 1&nbsp;TB of OneDrive. It is sold by local resellers — Star Tech, Ryans and Microsoft partners such as LKEY — and pairs with free ONLYOFFICE on the desktop, since Basic licenses the web and mobile apps only.</p>
     <a class="pagenav" href="./index.html">&larr; Full guide &amp; research</a>
@@ -679,89 +680,96 @@ img { max-width: 100%; height: auto; }
 
   // price = desk total in BDT; extras already included per machine type
   var MACHINES = [
-    { name: "Qbits Lania DX2 i5", base: 47000, kind: "desktop", url: "https://qbits.com/product-details/18/Qbits-Lania-DX2-Core%E2%84%A2-i5-12400-16-GB-RAM-500-GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Core i5-12400 · 16 GB · 500 GB NVMe · mini PC", total: 64000,
+    { name: "Qbits Lania DX2 i5", base: 47000, kind: "desktop", url: "https://qbits.com/product-details/18/Qbits-Lania-DX2-Core%E2%84%A2-i5-12400-16-GB-RAM-500-GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Core i5-12400 · 16 GB · 500 GB NVMe · mini PC", total: 61600,
       tags: [["16 GB", "good"], ["stock unconfirmed", "warn"]],
       s: { cpu: 9, mem: 9, storage: 8, warranty: 6, avail: 3, upgrade: 7, size: 8 } },
 
-    { name: "Qbits Lania X1 i7", base: 46999, kind: "desktop", url: "https://qbits.com/product-details/21/Qbits-Lania-X1-Intel%C2%AE-Core%E2%84%A2-i7-1165G7-16GB-DDR4-RAM-500GB-M.2-Western-Digital-NVMe-SSD", shop: "Qbits",   spec: "Core i7-1165G7 · 16 GB · 500 GB NVMe · Thunderbolt 4", total: 63999,
+    { name: "Qbits Lania X1 i7", base: 46999, kind: "desktop", url: "https://qbits.com/product-details/21/Qbits-Lania-X1-Intel%C2%AE-Core%E2%84%A2-i7-1165G7-16GB-DDR4-RAM-500GB-M.2-Western-Digital-NVMe-SSD", shop: "Qbits",   spec: "Core i7-1165G7 · 16 GB · 500 GB NVMe · Thunderbolt 4", total: 61599,
       tags: [["16 GB", "good"], ["warranty unclear", "warn"]],
       s: { cpu: 7, mem: 9, storage: 8, warranty: 5, avail: 4, upgrade: 8, size: 9 } },
 
-    { name: "Qbits Lania X1 i3", base: 29999, kind: "desktop", url: "https://qbits.com/product-details/107/Qbits-Lania-X1-Intel%C2%AE-Core%E2%84%A2-i3-1115G4-8GB-DDR4-RAM-256GB-M.2-NVMe-SSD", shop: "Qbits", spec: "Core i3-1115G4 \u00b7 8 GB \u00b7 256 GB NVMe \u00b7 Thunderbolt 4", total: 46999,
+    { name: "Qbits Lania X1 i3", base: 29999, kind: "desktop", url: "https://qbits.com/product-details/107/Qbits-Lania-X1-Intel%C2%AE-Core%E2%84%A2-i3-1115G4-8GB-DDR4-RAM-256GB-M.2-NVMe-SSD", shop: "Qbits", spec: "Core i3-1115G4 \u00b7 8 GB \u00b7 256 GB NVMe \u00b7 Thunderbolt 4", total: 44599,
       tags: [["2 cores only", "warn"], ["8 GB only", "warn"]],
       s: { cpu: 5, mem: 4, storage: 6, warranty: 5, avail: 3, upgrade: 8, size: 9 } },
 
-    { name: "Qbits Lania DX2 i3", base: 34999, kind: "desktop", url: "https://qbits.com/product-details/15/Qbits-Lania-DX2-Core%E2%84%A2-i3-12100-8-GB-RAM-500-GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Core i3-12100 · 8 GB · 500 GB NVMe · mini PC", total: 51999,
+    { name: "Qbits Lania DX2 i3", base: 34999, kind: "desktop", url: "https://qbits.com/product-details/15/Qbits-Lania-DX2-Core%E2%84%A2-i3-12100-8-GB-RAM-500-GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Core i3-12100 · 8 GB · 500 GB NVMe · mini PC", total: 49599,
       tags: [["price disputed", "warn"]],
       s: { cpu: 7, mem: 4, storage: 8, warranty: 6, avail: 3, upgrade: 8, size: 8 } },
 
-    { name: "Qbits Lania Mini F", base: 27999, kind: "desktop", url: "https://qbits.com/product-details/55/Qbits-Lania-Mini-F-Intel-N95-Processor-16GB-DDR4-RAM-500GB-M.2-NVMe-SSD", shop: "Qbits",  spec: "Intel N95 · 16 GB · 500 GB NVMe · 0.35 kg", total: 44999,
-      tags: [["16 GB", "good"]],
+    { name: "Qbits Lania Mini F", base: 27999, kind: "desktop", url: "https://qbits.com/product-details/55/Qbits-Lania-Mini-F-Intel-N95-Processor-16GB-DDR4-RAM-500GB-M.2-NVMe-SSD", shop: "Pickaboo",  spec: "Intel N95 · 16 GB · 500 GB NVMe · 0.35 kg", total: 42599,
+      note: "Two live prices for the same machine: \u09f327,999 on Pickaboo, \u09f336,999 direct from Qbits \u2014 a \u09f39,000 gap, both marked in stock. Scored at the Pickaboo price. At the Qbits price the desk total becomes \u09f354,000 and this stops being the cheap option.",
+      tags: [["16 GB", "good"], ["price varies by seller", "warn"]],
       s: { cpu: 4, mem: 9, storage: 8, warranty: 6, avail: 6, upgrade: 4, size: 10 } },
 
-    { name: "Qbits Mini F 256 GB", base: 24999, kind: "desktop", url: "https://qbits.com/product-details/60/Qbits-Lania-Mini-F-Intel-N95-Processor-16GB-DDR4-RAM-256GB-M.2-NVMe-SSD", shop: "Qbits", spec: "Intel N95 · 16 GB · 256 GB NVMe · 0.35 kg", total: 41999,
-      tags: [["16 GB", "good"], ["cheapest desk", "good"]],
+    { name: "Qbits Mini F 256 GB", base: 24999, kind: "desktop", url: "https://qbits.com/product-details/60/Qbits-Lania-Mini-F-Intel-N95-Processor-16GB-DDR4-RAM-256GB-M.2-NVMe-SSD", shop: "Pickaboo", spec: "Intel N95 · 16 GB · 256 GB NVMe · 0.35 kg", total: 39599,
+      note: "\u09f324,999 on Pickaboo against \u09f333,999 direct from Qbits \u2014 the same \u09f39,000 gap, both in stock. Scored at the Pickaboo price; confirm before ordering.",
+      tags: [["16 GB", "good"], ["price varies by seller", "warn"]],
       s: { cpu: 4, mem: 9, storage: 6, warranty: 6, avail: 6, upgrade: 4, size: 10 } },
 
-    { name: "Star Tech Ryzen 5 3400G", base: 36799, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-5-3400g-processor-gaming-pc", shop: "Star Tech", spec: "Ryzen 5 3400G \u00b7 4C/8T \u00b7 RAM not stated \u00b7 gaming tower", total: 53799,
+    { name: "Star Tech Ryzen 5 3400G", base: 36799, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-5-3400g-processor-gaming-pc", shop: "Star Tech", spec: "Ryzen 5 3400G \u00b7 4C/8T \u00b7 RAM not stated \u00b7 gaming tower", total: 51399,
       note: "Thirstiest option here. A 65 W chip in a gaming-spec case, so a larger PSU and possibly a discrete card \u2014 reckon on 50 W or more above a mini PC, roughly \u09f31,700 a year in extra electricity, and the shortest UPS runtime of any machine listed.",
       tags: [["in stock", "good"], ["highest running cost", "warn"]],
       s: { cpu: 6, mem: 4, storage: 5, warranty: 7, avail: 10, upgrade: 9, size: 2 } },
 
-    { name: "Star Tech Ryzen 5 2400G", base: 33499, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-5-2400g-desktop-pc", shop: "Star Tech", spec: "Ryzen 5 2400G \u00b7 4C/8T \u00b7 RAM not stated \u00b7 tower", total: 50499,
+    { name: "Star Tech Ryzen 5 2400G", base: 33499, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-5-2400g-desktop-pc", shop: "Star Tech", spec: "Ryzen 5 2400G \u00b7 4C/8T \u00b7 RAM not stated \u00b7 tower", total: 48099,
       note: "Four cores and eight threads beat the N95 on paper, but it is a 65 W part on an older process \u2014 about 45 W more at the wall, near \u09f3130 a month or \u09f31,600 a year on a commercial tariff.",
       tags: [["in stock", "good"], ["thirsty", "warn"]],
       s: { cpu: 6, mem: 4, storage: 5, warranty: 7, avail: 10, upgrade: 9, size: 2 } },
 
-    { name: "Star Tech Ryzen 3 2200G", base: 30000, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-3-2200g-desktop-pc", shop: "Star Tech", spec: "Ryzen 3 2200G \u00b7 4C/4T \u00b7 RAM not stated \u00b7 tower", total: 47000,
+    { name: "Star Tech Ryzen 3 2200G", base: 30000, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-3-2200g-desktop-pc", shop: "Star Tech", spec: "Ryzen 3 2200G \u00b7 4C/4T \u00b7 RAM not stated \u00b7 tower", total: 44600,
       note: "The cheapest AMD tower in stock. Four real cores, but a 65 W chip against the N95's 15 W \u2014 about \u09f31,600 a year more in electricity, which cancels the purchase saving inside two years.",
       tags: [["in stock", "good"], ["thirsty", "warn"]],
       s: { cpu: 5, mem: 4, storage: 5, warranty: 7, avail: 10, upgrade: 9, size: 2 } },
 
-    { name: "Walton Ryzen 3 3200G", base: 29000, kind: "desktop", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand", spec: "Ryzen 3 3200G \u00b7 8 GB \u00b7 128 GB SSD + 1 TB HDD \u00b7 tower", total: 46000,
-      note: "Faster than the N95, but a 65 W chip plus a mechanical hard drive \u2014 around \u09f31,600 a year in extra electricity, and the 1 TB HDD adds both draw and noise.",
-      tags: [["thirsty", "warn"], ["nationwide service", "good"]],
-      s: { cpu: 6, mem: 4, storage: 5, warranty: 9, avail: 8, upgrade: 9, size: 3 } },
+    { name: "Walton Ryzen 3 3200G", base: 29000, kind: "desktop", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand", spec: "Ryzen 3 3200G \u00b7 8 GB \u00b7 128 GB SSD + 1 TB HDD \u00b7 tower", total: 43600,
+      note: "Faster than the N95, but a 65 W chip plus a mechanical hard drive \u2014 around \u09f31,600 a year in extra electricity, and the 1 TB HDD adds both draw and noise. Out of stock at TechLand along with the rest of the Walton range.",
+      tags: [["thirsty", "warn"], ["out of stock", "warn"]],
+      s: { cpu: 6, mem: 4, storage: 5, warranty: 9, avail: 2, upgrade: 9, size: 3 } },
 
-    { name: "Star Tech 3400G (delisted)", base: 27100, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-5-3400g-processor-desktop-pc", shop: "Star Tech", spec: "Ryzen 5 3400G \u00b7 RAM not stated \u00b7 tower", total: 44100,
+    { name: "Star Tech 3400G (delisted)", base: 27100, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-5-3400g-processor-desktop-pc", shop: "Star Tech", spec: "Ryzen 5 3400G \u00b7 RAM not stated \u00b7 tower", total: 41700,
       note: "Same 65 W class as the in-stock 3400G gaming build, at a lower price \u2014 but discontinued, so treat it as a reference point rather than an option.",
       tags: [["thirsty", "warn"], ["discontinued", "warn"]],
       s: { cpu: 6, mem: 4, storage: 5, warranty: 7, avail: 1, upgrade: 9, size: 3 } },
 
-    { name: "Star Tech 5600G (delisted)", base: 34450, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-5-5600g-desktop-pc", shop: "Star Tech", spec: "Ryzen 5 5600G \u00b7 6 cores \u00b7 RAM not stated \u00b7 tower", total: 51450,
+    { name: "Star Tech 5600G (delisted)", base: 34450, kind: "desktop", url: "https://www.startech.com.bd/amd-ryzen-5-5600g-desktop-pc", shop: "Star Tech", spec: "Ryzen 5 5600G \u00b7 6 cores \u00b7 RAM not stated \u00b7 tower", total: 49050,
       note: "The fastest chip per taka anywhere on this page, and still a 65 W part \u2014 about \u09f31,600 a year in extra electricity. Discontinued at Star Tech; worth chasing elsewhere if raw speed is the priority.",
       tags: [["thirsty", "warn"], ["discontinued", "warn"]],
       s: { cpu: 8, mem: 4, storage: 5, warranty: 7, avail: 1, upgrade: 9, size: 3 } },
 
-    { name: "Walton i5-10400", base: 48550, kind: "desktop", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand",     spec: "Core i5-10400 · 8 GB · 256 GB SSD + 1 TB HDD · tower", total: 65550,
-      tags: [["nationwide service", "good"]],
-      s: { cpu: 7, mem: 4, storage: 6, warranty: 9, avail: 9, upgrade: 9, size: 3 } },
+    { name: "Walton i5-10400", base: 48550, kind: "desktop", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand",     spec: "Core i5-10400 · 8 GB · 256 GB SSD + 1 TB HDD · tower", total: 63150,
+      tags: [["out of stock", "warn"]],
+      note: "Out of stock at TechLand \u2014 every Walton tower on their listing shows the same.",
+      s: { cpu: 7, mem: 4, storage: 6, warranty: 9, avail: 2, upgrade: 9, size: 3 } },
 
-    { name: "Walton i3-10100", base: 39950, kind: "desktop", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand",     spec: "Core i3-10100 · 8 GB · 256 GB SSD + 1 TB HDD · tower", total: 56950,
-      tags: [["nationwide service", "good"]],
-      s: { cpu: 5, mem: 4, storage: 6, warranty: 9, avail: 9, upgrade: 9, size: 3 } },
+    { name: "Walton i3-10100", base: 39950, kind: "desktop", url: "https://www.techlandbd.com/computers/desktop-computer/brand-desktop-pc/walton-desktop-pc", shop: "TechLand",     spec: "Core i3-10100 · 8 GB · 256 GB SSD + 1 TB HDD · tower", total: 54550,
+      tags: [["out of stock", "warn"]],
+      note: "Out of stock at TechLand \u2014 every Walton tower on their listing shows the same.",
+      s: { cpu: 5, mem: 4, storage: 6, warranty: 9, avail: 2, upgrade: 9, size: 3 } },
 
-    { name: "Star Tech i5-12400", base: 51500, kind: "desktop", url: "https://www.startech.com.bd/intel-12th-gen-core-i5-12400-desktop-pc", shop: "Star Tech",  spec: "Core i5-12400 · RAM not stated · tower", total: 68500,
+    { name: "Star Tech i5-12400", base: 51500, kind: "desktop", url: "https://www.startech.com.bd/intel-12th-gen-core-i5-12400-desktop-pc", shop: "Star Tech",  spec: "Core i5-12400 · RAM not stated · tower", total: 66100,
       tags: [["walk in and buy", "good"], ["RAM unstated", "warn"]],
       s: { cpu: 9, mem: 4, storage: 6, warranty: 7, avail: 10, upgrade: 9, size: 3 } },
 
-    { name: "Star Tech i3-12100", base: 43600, kind: "desktop", url: "https://www.startech.com.bd/intel-core-i3-12100-12th-gen-budget-desktop-pc", shop: "Star Tech",  spec: "Core i3-12100 · RAM not stated · tower", total: 60600,
+    { name: "Star Tech i3-12100", base: 45799, kind: "desktop", url: "https://www.startech.com.bd/intel-core-i3-12100-12th-gen-budget-desktop-pc", shop: "Star Tech",  spec: "Core i3-12100 · RAM not stated · tower", total: 60399,
       tags: [["walk in and buy", "good"], ["RAM unstated", "warn"]],
       s: { cpu: 7, mem: 4, storage: 6, warranty: 7, avail: 10, upgrade: 9, size: 3 } },
 
-    { name: "Eastern IT i5-12400", base: 47700, kind: "desktop", url: "https://www.eit.com.bd/desktop", shop: "Eastern IT", spec: "Core i5-12400 · 8 GB · 256 GB SSD · tower", total: 64700,
-      tags: [],
-      s: { cpu: 9, mem: 4, storage: 6, warranty: 6, avail: 8, upgrade: 9, size: 3 } },
+    { name: "Eastern IT i5-12400", base: 47700, kind: "desktop", url: "https://www.eit.com.bd/desktop", shop: "Eastern IT", spec: "Core i5-12400 · 8 GB · 256 GB SSD · tower", total: 62300,
+      tags: [["price unverified", "warn"]],
+      note: "Eastern IT's desktop page no longer lists individual products, so this price could not be re-checked. Treat it as of 21 August and confirm by phone.",
+      s: { cpu: 9, mem: 4, storage: 6, warranty: 6, avail: 5, upgrade: 9, size: 3 } },
 
-    { name: "Dell Pro Tower", base: 68000, kind: "desktop", url: "https://www.eit.com.bd/desktop", shop: "Eastern IT",      spec: "Core i3-14100 · 8 GB DDR5 · 512 GB SSD · tower", total: 85000,
-      tags: [["brand warranty", "good"]],
-      s: { cpu: 7, mem: 4, storage: 8, warranty: 9, avail: 7, upgrade: 8, size: 4 } },
+    { name: "Dell Pro Tower", base: 68000, kind: "desktop", url: "https://www.eit.com.bd/desktop", shop: "Eastern IT",      spec: "Core i3-14100 · 8 GB DDR5 · 512 GB SSD · tower", total: 82600,
+      tags: [["brand warranty", "good"], ["price unverified", "warn"]],
+      note: "Eastern IT's desktop page no longer lists individual products, so this price could not be re-checked.",
+      s: { cpu: 7, mem: 4, storage: 8, warranty: 9, avail: 5, upgrade: 8, size: 4 } },
 
-    { name: "Walton all-in-one", base: 61550, kind: "aio", url: "https://www.techlandbd.com/computers/desktop-computer", shop: "TechLand",   spec: "Core i3 12th gen · 16 GB · 512 GB SSD · screen built in", total: 68250,
+    { name: "Walton all-in-one", base: 61550, kind: "aio", url: "https://www.techlandbd.com/computers/desktop-computer", shop: "TechLand",   spec: "Core i3 12th gen · 16 GB · 512 GB SSD · screen built in", total: 65300,
       tags: [["16 GB", "good"], ["monitor included", "good"]],
-      s: { cpu: 7, mem: 9, storage: 8, warranty: 9, avail: 8, upgrade: 4, size: 7 } },
+      note: "Price confirmed at \u09f361,550, reduced from \u09f365,000. TechLand states no stock status for the all-in-ones, and every Walton tower on their site is out of stock \u2014 confirm before ordering.",
+      s: { cpu: 7, mem: 9, storage: 8, warranty: 9, avail: 6, upgrade: 4, size: 7 } },
 
-    { name: "HP EliteBook 840 G9", base: 51499, kind: "laptop", url: "https://www.bdstall.com/details/hp-elitebook-840-g9-core-i5-12th-gen-512gb-ssd-98287/", shop: "BDStall", spec: "Core i5-1265U · 16 GB DDR5 · 512 GB · used import", total: 61799,
+    { name: "HP EliteBook 840 G9", base: 52000, kind: "laptop", url: "https://www.bdstall.com/details/hp-elitebook-840-g9-core-i5-12th-gen-512gb-ssd-98287/", shop: "BDStall", spec: "Core i5-1265U · 16 GB DDR5 · 512 GB · used import", total: 62850,
       tags: [["16 GB", "good"], ["no maker warranty", "warn"]],
       s: { cpu: 8, mem: 9, storage: 8, warranty: 2, avail: 5, upgrade: 5, size: 9 } }
   ];
@@ -770,15 +778,15 @@ img { max-width: 100%; height: auto; }
   var EXTRAS = {
     desktop: [
       ["22-inch FHD IPS monitor", 8800],
-      ["1200 VA offline UPS", 6700],
-      ["Keyboard, mouse, power strip", 1500]
+      ["Apollo 650 VA / 300 W UPS", 3750],
+      ["Logitech MK215 keyboard + mouse", 2050]
     ],
     aio: [
-      ["1200 VA offline UPS", 6700]
+      ["Apollo 650 VA / 300 W UPS", 3750]
     ],
     laptop: [
       ["22-inch FHD IPS monitor", 8800],
-      ["Keyboard and mouse", 1500]
+      ["Logitech MK215 keyboard + mouse", 2050]
     ]
   };
 
